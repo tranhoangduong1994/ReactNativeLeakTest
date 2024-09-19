@@ -93,8 +93,12 @@ android {
             keyPassword 'android'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
     buildTypes {
         debug {
+            debuggable true
             signingConfig signingConfigs.debug
         }
         release {
