@@ -11,7 +11,6 @@ import com.facebook.react.ReactInstanceManager
 import com.facebook.react.common.LifecycleState
 import com.facebook.soloader.SoLoader
 import com.reactnativeleaktest.databinding.MainActivityBinding
-import com.reactnativeleaktest.react.ReactCommunicator
 import com.reactnativeleaktest.react.SimpleReactActivity
 
 class MainActivity: Activity() {
@@ -32,16 +31,12 @@ class MainActivity: Activity() {
 
         SoLoader.init(this, false)
 
-        val packages = PackageList(application).packages.apply {
-            add(ReactCommunicator())
-        }
-
         reactInstanceManager = ReactInstanceManager.builder()
             .setApplication(application)
             .setCurrentActivity(this)
             .setBundleAssetName("index.android.bundle")
             .setJSMainModulePath("index")
-            .addPackages(packages)
+            .addPackages(PackageList(application).packages)
             .setUseDeveloperSupport(BuildConfig.DEBUG)
             .setInitialLifecycleState(LifecycleState.RESUMED)
             .build()
